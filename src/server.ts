@@ -13,7 +13,7 @@ const startServer = async () => {
     console.log('✅ Database connected successfully');
 
     // Start server
-    const server = app.listen(PORT,() => {
+    const server = app.listen(PORT, () => {
       console.log('='.repeat(50));
       console.log('🚀 Server STARTED SUCCESSFULLY!');
       console.log('='.repeat(50));

@@ -52,6 +52,7 @@ export interface EventVoucherCreateRequest {
   minPurchaseAmount?: number;
   startDate: Date;
   endDate: Date;
+  description?: string; // Tambahkan ini
 }
 
 export interface TransactionCreateRequest {
@@ -102,4 +103,32 @@ export interface DashboardStats {
   totalTransactions: number;
   totalRevenue: number;
   upcomingEvents: number;
+}
+
+// Tambahan types untuk fix
+export interface VoucherCreateRequest {
+  code: string;
+  discountType: DiscountType;
+  discountValue: number;
+  maxUsage: number;
+  minPurchaseAmount?: number;
+  startDate: Date;
+  endDate: Date;
+  description?: string;
+}
+
+export interface TransactionUpdateRequest {
+  status?: TransactionStatus;
+  failureReason?: string;
+}
+
+export interface VoucherUpdateRequest {
+  code?: string;
+  discountType?: DiscountType;
+  discountValue?: number;
+  maxUsage?: number;
+  minPurchaseAmount?: number;
+  startDate?: Date;
+  endDate?: Date;
+  description?: string;
 }

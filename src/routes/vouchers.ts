@@ -14,12 +14,13 @@ const router = Router();
 router.get('/event/:eventId/active', getActiveVouchers);
 
 // Protected routes
-router.use(authenticate);
+// router.use(authenticate); // ❌ HAPUS BARIS INI
 
 // Organizer routes
-router.post('/event/:eventId', authorize('ORGANIZER'), createVoucher);
-router.get('/event/:eventId', authorize('ORGANIZER'), getEventVouchers);
-router.put('/:voucherId/update', authorize('ORGANIZER'), updateVoucher);
-router.delete('/:voucherId/delete', authorize('ORGANIZER'), deleteVoucher);
+// 🔥 PERBAIKAN: Ganti semua paths
+router.post('/event/:eventId', authenticate, authorize('ORGANIZER'), createVoucher);
+router.get('/event/:eventId', authenticate, authorize('ORGANIZER'), getEventVouchers);
+router.put('/:voucherId', authenticate, authorize('ORGANIZER'), updateVoucher); // ✅ Hapus /update
+router.delete('/:voucherId', authenticate, authorize('ORGANIZER'), deleteVoucher); // ✅ Hapus /delete
 
 export default router;

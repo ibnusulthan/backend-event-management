@@ -168,3 +168,64 @@ export const getEventTransactions = async (req: AuthRequest, res: Response): Pro
     });
   }
 };
+
+export const getTransactionById = async (req: AuthRequest, res: Response): Promise<void> => {
+  try {
+    if (!req.user) {
+      res.status(401).json({
+        success: false,
+        message: 'User not authenticated',
+      });
+      return;
+    }
+
+    const { id } = req.params;
+
+    const transaction = await transactionService.getTransactionById(id, req.user.id);
+
+    res.status(200).json({
+      success: true,
+      message: 'Transaction retrieved successfully',
+      data: transaction,
+    });
+  } catch (error: any) {
+    if (error.message.includes('not found')) {
+      res.status(404).json({
+        success: false,
+        message: error.message,
+      });
+    } else {
+      res.status(500).json({
+        success: false,
+        message: error.message,
+      });
+    }
+  }
+};
+
+export const cancelTransaction = async (req: AuthRequest, res: Response): Promise<void> => {
+  try {
+    if (!req.user) {
+      res.status(401).json({
+        success: false,
+        message: 'User not authenticated',
+      });
+      return;
+    }
+
+    const { id } = req.params;
+
+    const transaction = await transactionService.cancelTransaction(id, req.user.id);
+
+    res.status(200).json({
+      success: true,
+      message: 'Transaction cancelled successfully',
+      data: transaction,
+    });
+  } catch (error: any) {
+    res.status(400).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};

@@ -51,7 +51,8 @@ router.patch(
   updateEventImage
 );
 
-router.get('/organizer/my-events', authorize('ORGANIZER'), getOrganizerEvents);
+// 🔥 PERBAIKAN: Ganti path yang sesuai dengan Postman test
+router.get('/organizer/events', authorize('ORGANIZER'), getOrganizerEvents); // ✅ Match dengan Postman
 router.get('/:id/analytics', authorize('ORGANIZER'), getEventAnalytics);
 
 export default router;
